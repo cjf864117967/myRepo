@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bw.mapper.LineDao">
+	<select id="getSheng" resultType="com.bw.bean.Area">
+		select * from t_area where pdi is null
+	</select>
+	<select id="getShi" resultType="com.bw.bean.Area" parameterType="int">
+		select * from t_area where pdi = #{aid}
+	</select>
+	<select id="getXian" resultType="com.bw.bean.Area" parameterType="int">
+		select * from t_area where pdi = #{aid}
+	</select>
+	
+	<insert id="addLine" parameterType="com.bw.bean.Line">
+		insert into t_line (lid,lname,ldesc,ltese,limage,iopen,iclose,sheng,shi,xian,uid,uname,utype) values (#{lid},#{lname},#{ldesc},#{ltese},#{limage},#{iopen},#{iclose},#{sheng},#{shi},#{xian},#{uid},#{uname},#{utype});
+	</insert>
+	<insert id="addzj" parameterType="map">
+		insert into t_user_line (uid,lid) values (#{uid},#{lid})
+	</insert>
+	
+	<resultMap type="com.bw.bean.Line" id="aaa">
+		<association property="sheng1" column="sheng" javaType="com.bw.bean.Area" select="getAreaList"></association>
+		<association property="shi1" column="shi" javaType="com.bw.bean.Area" select="getAreaList"></association>
+		
+		<association property="xian1" column="xian" javaType="com.bw.bean.Area" select="getAreaList"></association>
+		<association property="uname1" column="uname" javaType="com.bw.bean.User" select="getUserList1"></association>
+		<association property="utype1" column="utype" javaType="com.bw.bean.User" select="getUserList2"></association>
+	</resultMap>
+	<select id="getLineList" resultMap="aaa" >
+		select l.lid,l.lname,l.ltese,l.sheng,l.shi,l.xian ,u.uid,u.uname,u.utype,l.ldesc ,l.iopen,l.iclose from t_line l,t_user u,t_user_line ul where l.lid=ul.lid and u.uid=ul.uid  
+		<if test="mname!=null and mname !=''">
+			and lname like '%${mname}%'
+		</if>
+		 <if test="tname!=null and tname !=''">
+			and ldesc like '%${tname}%'
+		</if> 
+		<!-- <if test="sheng!=null and sheng !=''">
+			and sheng = #{sheng} and shi = #{shi} and xian = #{xian}
+		</if>
+		<if test="shi!=null and shi !=''">
+			and shi = #{shi} and xian = #{xian}
+		</if>
+		<if test="xian!=null and xian !=''">
+			 and xian = #{xian}
+		</if> -->
+	</select>
+	<select id="getAreaList" resultType="com.bw.bean.Area" parameterType="int">
+		select * from t_area where aid = #{0}
+	</select>
+	<select id="getUserList1" resultType="com.bw.bean.User" parameterType="string">
+		select * from t_user where uname=#{0}
+	</select>
+	<select id="getUserList2" resultType="com.bw.bean.User" parameterType="int">
+		select * from t_user where utype=#{0}
+	</select>
+	
+	<select id="getLine" resultType="com.bw.bean.Line" parameterType="int">
+		select * from t_line where lid = #{lid}
+	</select>
+	<select id="getSheng1" resultType="com.bw.bean.Area" parameterType="int">
+		select * from t_area where aid = #{aid}
+	</select>
+	
+	<select id="getShi1" resultType="com.bw.bean.Area" parameterType="int">
+		select * from t_area where aid = #{aid}
+	</select>
+	
+	<select id="getXian1" resultType="com.bw.bean.Area" parameterType="int">
+		select * from t_area where aid = #{aid}
+	</select>
+	<insert id="addUserLine" parameterType="map">
+		<!-- insert into t_user_line (uid,lid) values (#{uid},#{lid}) -->
+	{
+		call t(#{uid},#{lid})
+	}
+	</insert>
+	<delete id="deleteAll" parameterType="int">
+		delete from t_line where lid = #{lid}
+	</delete>
+	<delete id="deleteLine" parameterType="int">
+		delete from t_user_line where lid = #{lid}
+	</delete>
+</mapper>
