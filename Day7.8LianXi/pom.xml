@@ -6,8 +6,7 @@
   <packaging>war</packaging>
   
   
-
-	<dependencies>
+<dependencies>
   	<dependency>
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-webmvc</artifactId>
@@ -164,4 +163,5 @@
 		<version>1.2.2</version>
 	</dependency>
   </dependencies>
+	
 </project>
