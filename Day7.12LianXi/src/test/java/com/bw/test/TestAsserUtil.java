@@ -1,5 +1,6 @@
 package com.bw.test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,5 +86,28 @@ public class TestAsserUtil {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+	}
+	@Test
+	public void testDouble(){
+		double x=66.7;
+		double y=100;
+		System.out.println(x*y);
+		BigDecimal b=new BigDecimal("66.77");
+		BigDecimal b2=new BigDecimal("100");
+		System.out.println(b.multiply(b2));
+		System.out.println(b.subtract(b2));
+		System.out.println(b.add(b2));
+		System.out.println(b.divide(b2));
+		String[] split = "1,2,3,4,5,6".split(",");
+		for (String string : split) {
+			System.out.println(1+string);
+		}
+		String substring = "123 456".substring(0, 2);
+		System.out.println(substring);
+		System.out.println("123456".startsWith("2", 1));
+		System.out.println();
+		int[] num = {1,2,3,4,5,6};
+		
+		
 	}
 }
