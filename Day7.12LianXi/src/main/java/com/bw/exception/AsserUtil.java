@@ -1,6 +1,7 @@
 package com.bw.exception;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,14 @@ public class AsserUtil {
 			throw new CRuntimeException(message);
 		}
 	}
-	
+	/**
+	 * 
+	 * @Title: isNotNull 
+	 * @Description: TODO
+	 * @param exp
+	 * @param message
+	 * @return: void
+	 */
 	public static void isNotNull(Object exp,String message){
 		if(exp==null){
 			throw new CRuntimeException(message);
@@ -85,6 +93,12 @@ public class AsserUtil {
 	 */
 	public static void isZheng(Integer exp,String message) {
 		if(!(exp>0)){
+			throw new CRuntimeException(message);
+		}
+	}
+	
+	public static void IsCollection(Collection<?> collection,String message) {
+		if(collection==null || collection.size()==0){
 			throw new CRuntimeException(message);
 		}
 	}
