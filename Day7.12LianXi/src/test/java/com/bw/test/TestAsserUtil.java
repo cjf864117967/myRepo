@@ -3,6 +3,7 @@ package com.bw.test;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -109,5 +110,10 @@ public class TestAsserUtil {
 		int[] num = {1,2,3,4,5,6};
 		
 		
+	}
+	@Test
+	public void test(){
+		HashMap<?, ?> map = new HashMap<>();
+		ArrayList<?> list = new ArrayList<>();
 	}
 }
