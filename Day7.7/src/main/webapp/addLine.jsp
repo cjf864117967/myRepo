@@ -4,12 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/index3.css" type="text/css">
-<script type="text/javascript" src="<%=request.getContextPath() %>/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap3/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap3/css/bootstrap-theme.min.css">
+<script src="${pageContext.request.contextPath}/bootstrap3/js/jquery-1.11.2.min.js"></script>
+<script src="${pageContext.request.contextPath}/bootstrap3/js/bootstrap.min.js"></script>
+
+
 <title>Insert title here</title>
+
 <script type="text/javascript">
-	$(function(){
+	/* $(function(){
 		$.post(
+				
 			"getSheng.do",
 			function(data){
 				var sheng = data.list;
@@ -51,7 +57,7 @@
 			},
 			"json"
 		)
-	}
+	} */
 </script>
 </head>
 <body>

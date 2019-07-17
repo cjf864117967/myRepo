@@ -5,8 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/index3.css" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/bootstrap3/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/bootstrap3/css/bootstrap-theme.min.css">
+<script src="<%=request.getContextPath() %>/bootstrap3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/jquery-1.8.3.min.js"></script>
+
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function(){
@@ -22,7 +25,7 @@
 		)
 	})
 	function getShi(){
-		var aid = $("#sheng option:checked").val();
+		var aid = $("#sheng option:checked").val();	
 		$("#shi").empty();
 		$("#xian").empty();
 		$("#shi").append("<option>==请选择==</option>");
