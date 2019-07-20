@@ -73,4 +73,34 @@ public class UserController {
 		return "user-space/blog_list";
 		
 	}
+	@RequestMapping("/blog/edit")
+	public String edit(Integer id,Model model){
+		Article article = articleService.selectByPrimaryKey(id);
+		model.addAttribute("blog", article);
+		return "user-space/blog_edit";
+	}
+	@RequestMapping("/blog/save")
+	public String save(Article article,MultipartFile file,HttpServletRequest request){
+		
+		String upload2 = FileUploadUtil.upload(request, file);
+		if(!upload2.equals("")){
+			article.setPicture(upload2);
+		}
+		if(article.getId()!=null){
+			//修改文章
+			articleService.updateByKey(article);
+		}else{
+			article.setHits(0);//第一次点击数
+			article.setHot(true);//是否为热门文章
+			article.setStatus(1);//是否通过审核
+			article.setDeleted(false);//是否被删除
+			article.setCreated(new Date());//文章发布时间
+			//发布文章
+			User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
+			article.setAuthor(user);
+			articleService.save(article);
+		}
+		return "redirect:/my/blogs";
+		
+	}
 }

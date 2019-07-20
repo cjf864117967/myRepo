@@ -34,6 +34,10 @@ public interface ArticleService {
 	public abstract Article selectByPrimaryKey(Integer id);
 
 	public abstract List<Article> queryAll(Article article);
+
+	public abstract void updateByKey(Article article);
+
+	public abstract void save(Article article);
 	
 
 }
