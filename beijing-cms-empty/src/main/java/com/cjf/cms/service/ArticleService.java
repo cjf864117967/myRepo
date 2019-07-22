@@ -38,6 +38,8 @@ public interface ArticleService {
 	public abstract void updateByKey(Article article);
 
 	public abstract void save(Article article);
+
+	public abstract void deleteByPrimaryKey(Integer id);
 	
 
 }

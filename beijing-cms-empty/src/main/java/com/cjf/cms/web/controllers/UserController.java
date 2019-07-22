@@ -103,4 +103,10 @@ public class UserController {
 		return "redirect:/my/blogs";
 		
 	}
+	@RequestMapping("/blog/remove")
+	public String remove(Integer id){
+		articleService.deleteByPrimaryKey(id);
+		return "redirect:/my/blogs";
+		
+	}
 }

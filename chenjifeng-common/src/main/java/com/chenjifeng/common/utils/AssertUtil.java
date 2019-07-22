@@ -101,6 +101,19 @@ public class AssertUtil {
 			throw new CRuntimeException(message);
 		}
 	}
+	/**
+	 * 
+	 * @Title: hasText2 
+	 * @Description: 断言字符串长度不能小于6
+	 * @param condition
+	 * @param message
+	 * @return: void
+	 */
+	public static void hasText2(String condition,String message) {
+		if(condition.trim().length()<6){
+			throw new CRuntimeException(message);
+		}
+	}
 	
 	/**
 	 * 
@@ -116,4 +129,26 @@ public class AssertUtil {
 			throw new CRuntimeException(message);
 		}
 	}
+	
+	
+	/**
+	 * 
+	 * @Title: num 
+	 * @Description: 循环输出6位1-10之间的随机数
+	 * @return
+	 * @return: String
+	 */
+	public static String num(){
+		String str="";
+		for (int i = 0; i < 6; i++) {
+			long random = (long) Math.floor(Math.random()*9);
+			
+			str+=String.valueOf(random);
+		}
+		return str;
+	}
+	
+	
+	
+	
 }

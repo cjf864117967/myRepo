@@ -386,4 +386,8 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+   	 	delete from cms_article where id = #{id,jdbcType=INTEGER}
+  	</delete>
 </mapper>

@@ -63,4 +63,7 @@ public interface ArticleMapper {
 
 	public void updateByKey(Article article);
 
+
+	public void deleteByPrimaryKey(Integer id);
+
 }
