@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.cjf.cms.core.Page;
 import com.cjf.cms.domain.Article;
+import com.cjf.cms.domain.Special;
+import com.cjf.cms.domain.User;
 
 
 /**
@@ -65,5 +67,17 @@ public interface ArticleMapper {
 
 
 	public void deleteByPrimaryKey(Integer id);
+
+
+	public void updateUserByKey(User user);
+
+
+	public List<Article> queryAll1(@Param("article")Article article);
+
+
+	public List<Article> selects(@Param("article")Article article);
+
+
+	public List<Special> getSpecial();
 
 }

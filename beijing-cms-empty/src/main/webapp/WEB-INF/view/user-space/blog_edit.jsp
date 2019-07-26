@@ -62,6 +62,14 @@
 				    		<span class="red"></span>
 				    	</p>
 				    	<p>
+				    		<input name="gjz" value="${blog.gjz}" class="form-control" placeholder="关键字"/>
+				    		<span class="red"></span>
+				    	</p>
+				    	<p>
+				    		<input name="wzlj" value="${blog.wzlj}" class="form-control" placeholder="网站链接"/>
+				    		<span class="red"></span>
+				    	</p>
+				    	<p>
 				    		<textarea name="content" rows="30"  class="form-control" placeholder="摘要">${blog.content }</textarea>
 				    		<span class="red"></span>
 				    	</p>

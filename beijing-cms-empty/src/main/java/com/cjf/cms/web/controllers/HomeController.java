@@ -18,6 +18,8 @@ import com.cjf.cms.domain.Article;
 import com.cjf.cms.domain.Category;
 import com.cjf.cms.domain.Channel;
 import com.cjf.cms.domain.Slide;
+import com.cjf.cms.domain.Special;
+import com.cjf.cms.service.AdminHomeService;
 import com.cjf.cms.service.ArticleService;
 import com.cjf.cms.service.SlideService;
 
@@ -38,9 +40,14 @@ public class HomeController {
 	@Resource
 	private SlideService slideService;
 	
+	
+	@Resource
+	private AdminHomeService adminhomeService;
+	
 	@RequestMapping({"/", "/index", "/home"})
 	public String home(
 			@RequestParam(required = false) Integer channel, //频道
+			
 			@RequestParam(required = false) Integer category,//分类
 			@RequestParam(defaultValue = "1") Integer page,//分类
 			Model model){
@@ -89,6 +96,9 @@ public class HomeController {
 			model.addAttribute("channel", new Channel(channel));
 		}
 		model.addAttribute("category", category);
+		//专题
+		List<Special> special = articleService.getSpecial();
+		model.addAttribute("special", special);
 		
 		return "home";
 	}

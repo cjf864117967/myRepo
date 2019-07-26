@@ -45,10 +45,10 @@
 				    		<thead>
 				    			<tr class="info">
 				    				<th>标题</th>
-				    				<th>分类</th>
+				    				<th>摘要</th>
 				    				<th>点击量</th>
-				    				<th>评论数</th>
-				    				<th>时间</th>
+				    				<th>关键字</th>
+				    				<th>原文链接</th>
 				    				<th>操作</th>
 				    			</tr>
 				    		</thead>
@@ -56,10 +56,11 @@
 				    		<c:forEach items="${blogs}" var="blog">
 				    			<tr id="item_${blog.id}">
 				    				<td>${blog.title}</td>
-				    				<td>${blog.category.name}</td>
+				    				<td>${blog.summary}</td>
 				    				<td>${blog.hits}</td>
-				    				<td></td>
-				    				<td><fmt:formatDate value="${blog.updated}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+									<td>${blog.gjz }</td>
+									<td>${blog.wzlj }</td>				    				
+				    				<%-- <td><fmt:formatDate value="${blog.created}" pattern="yyyy-MM-dd HH:mm:ss"/></td> --%>
 				    				<td><a class="btn btn-primary" href="/my/blog/edit?id=${blog.id}" title="编辑"><span class="glyphicon glyphicon-edit">编辑</span></a>&nbsp;&nbsp;
 				    				<a class="btn btn-success" onclick="removeBlog(${blog.id});" title="删除"><span class="glyphicon glyphicon-remove">删除</span></a></td>
 				    			</tr>

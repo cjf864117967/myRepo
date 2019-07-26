@@ -43,6 +43,22 @@
 				  <div class="panel-body">
 				   <h1>我的头像</h1>
 				    	<hr/>
+				    	
+				    	<form class="form-horizontal" action="/my/addUserPhoto" enctype="multipart/form-data" method="post">
+						  <img alt="" src="<%=request.getContextPath()%>${user.pictures}" width="200px" height="150px" class="img-thumbnail">
+						  <input type="hidden" value="${user.id }" name="id">
+						  <div class="form-group">
+						    <label for="inputEmail3" class="col-sm-2 control-label">上传头像</label>
+						    <div class="col-sm-6">
+						      <input type="file" name="file"  placeholder="请上传头像">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <div class="col-sm-offset-2 col-sm-10">
+						      <button type="submit" class="btn btn-default">提交</button>
+						    </div>
+						  </div>
+						</form>
 				  </div>
 				</div>
 				

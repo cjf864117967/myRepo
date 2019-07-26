@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjf.cms.dao.AdminHomeMapper">
+	<select id="queryAll" resultType="com.cjf.cms.domain.Special">
+		select s.id,s.tittle,count(a.title)number from cms_special s,cms_article a,cms_special_article sa where s.id=sa.sid and a.id=sa.aid GROUP BY s.id;
+	</select>
+	<select id="zjarticle" parameterType="int" resultType="com.cjf.cms.domain.Special">
+		select * from cms_special where id=#{id}
+	</select>
+	<select id="queryAllById" parameterType="int" resultType="com.cjf.cms.domain.Article">
+		select a.id,a.title,a.created from cms_article a,cms_special_article sa where a.id=sa.aid and sa.sid=#{id} 
+	</select>
+	<insert id="save" parameterType="map">
+		insert into cms_special_article (sid,aid) values (#{sid},#{aid})
+	</insert>
+</mapper>

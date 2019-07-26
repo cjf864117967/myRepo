@@ -11,10 +11,17 @@
     <result column="locked" jdbcType="BIT" property="locked" />
     <result column="created" jdbcType="TIMESTAMP" property="created" />
     <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    
+    <result column="star" jdbcType="VARCHAR" property="star" />
+    <result column="motot" jdbcType="VARCHAR" property="motot" />
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, username, password, nickname, birthday, gender, locked, created, updated
+    id, username, password, nickname, birthday, gender, locked, created, updated,phone,email,address,star,motot,pictures
   </sql>
   
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -95,4 +102,7 @@
     </trim>
   </insert>
   
+  <update id="addUserPhoto" parameterType="com.cjf.cms.domain.User">
+  	 update cms_user set pictures = #{pictures} where id = #{id};
+  </update>
 </mapper>

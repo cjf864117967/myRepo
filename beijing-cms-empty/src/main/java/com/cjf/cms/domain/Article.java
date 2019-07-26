@@ -43,9 +43,17 @@ public class Article implements Serializable {
 	
 	/**所属分类**/
 	private Category category;
+	private Integer user_id;
+	
 	
 	/**作者**/
 	private User author;
+	
+	/**关键字**/
+	private String gjz;
+	
+	/**关键字**/
+	private String wzlj;
 	
 	/**点击量**/
 	private Integer hits;
@@ -64,14 +72,25 @@ public class Article implements Serializable {
 	
 	/**更新时间**/
 	private Date updated;
-
+	
+	
+	
 	
 	//---------------------------------------------------------------------
 
+	
 	public Article() {
 		super();
 	}
 	
+	public Integer getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
+	}
+
 	public Article(Integer id) {
 		super();
 		this.id = id;
@@ -191,9 +210,25 @@ public class Article implements Serializable {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
+	
+	public String getGjz() {
+		return gjz;
+	}
+
+	public void setGjz(String gjz) {
+		this.gjz = gjz;
+	}
+
+	public String getWzlj() {
+		return wzlj;
+	}
+
+	public void setWzlj(String wzlj) {
+		this.wzlj = wzlj;
+	}
+	//---------------------------------------------------------------------
 
 	
-	//---------------------------------------------------------------------
 
 	@Override
 	public int hashCode() {
@@ -219,5 +254,17 @@ public class Article implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", title=" + title + ", summary="
+				+ summary + ", content=" + content + ", picture=" + picture
+				+ ", channel=" + channel + ", category=" + category
+				+ ", author=" + author + ", gjz=" + gjz + ", wzlj=" + wzlj
+				+ ", hits=" + hits + ", hot=" + hot + ", status=" + status
+				+ ", deleted=" + deleted + ", created=" + created
+				+ ", updated=" + updated + "]";
+	}
+	
 	
 }

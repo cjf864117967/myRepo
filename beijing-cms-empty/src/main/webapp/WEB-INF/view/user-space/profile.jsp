@@ -33,21 +33,74 @@
 	</div>
 	<br/>
 	<!-- 主体内容区 -->
-	<div class="container">
+	 <div class="container">
 		<div class="row">
 			<div class="col-md-3">
 				<jsp:include page="/WEB-INF/inc/my_left.jsp"><jsp:param value="profile" name="module"/></jsp:include>
 			</div>
-			<div class="col-md-9">
+			 <div class="col-md-9">
 				<div class="panel panel-default">
 				  <div class="panel-body">
-				    右边区域
+				   		<h1> 个人设置</h1>
 				  </div>
 				</div>
 				
-			</div>
-		</div>
-	</div>
+			
+			<form class="form-horizontal" action="/my/user/edit" method="post">
+				  <div class="form-group">
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="id" value="${user.id }"  placeholder="ID">
+				    </div>
+				  </div>	
+				  <div class="form-group">
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="username" value="${user.username }"  placeholder="用户名">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="password" value="${user.password }"  placeholder="密码">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="phone" value="${user.phone }"  placeholder="电话">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="email" value="${user.email }"  placeholder="邮箱">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="address" value="${user.address }"  placeholder="地址">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="star" value="${user.star }"  placeholder="星座">
+				    </div>
+				  </div>
+				  
+				  
+				  <div class="form-group">
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" name="motot" value="${user.motot }"  placeholder="座右铭">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <div class="col-sm-offset-2 col-sm-10">
+				      <button type="submit" class="btn btn-default">保存</button>
+				    </div>
+				  </div>
+				</form>
+			</div> 
+		</div> 
+		
+	</div> 
+	
 	
 	<jsp:include page="/WEB-INF/inc/footer.jsp"/>
 	

@@ -140,7 +140,23 @@
 						</ol>
 					</div>
 				</div>
-			</div>
+				<div>
+					<h3>专题</h3>
+					<table class="table table-hover">
+						<c:forEach items="${special }" var="b">
+							<font color="red">${b.tittle }</font><br>
+							${b.aabstract }<br>
+							<c:forEach items="${b.listArticle }" var="b1">
+								${b1.title }<br>
+							</c:forEach>
+							<font color="blue">更多>></font>
+							<br>
+						</c:forEach>
+					</table>
+					
+				</div>
+			</div> 
+			
 		</div>
 	</div>
 	

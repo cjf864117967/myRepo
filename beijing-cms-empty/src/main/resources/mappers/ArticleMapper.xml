@@ -15,6 +15,7 @@
     <result column="deleted" property="deleted" jdbcType="BIT"/>
     <result column="created" property="created" jdbcType="TIMESTAMP"/>
     <result column="updated" property="updated" jdbcType="TIMESTAMP"/>
+  
     
     <result column="author_id" property="author.id" jdbcType="INTEGER"/>
     <result column="author_nickname" property="author.nickname" jdbcType="VARCHAR"/>
@@ -25,6 +26,8 @@
     <result column="category_id" property="category.id" jdbcType="INTEGER"/>
     <result column="category_name" property="category.name" jdbcType="VARCHAR"/>
     
+    <result column="gjz" property="gjz" jdbcType="VARCHAR"/>
+    <result column="wzlj" property="wzlj" jdbcType="VARCHAR"/>
     <!-- 多对一查询自动映射实体 
     <association property="channel">
     	<id column="channel_id" property="id" jdbcType="INTEGER"/>
@@ -40,6 +43,31 @@
     </association>-->
   </resultMap>
   
+  
+  
+  
+  <select id="getSpecial" resultMap="specialMap">
+  	select id,tittle,aabstract from cms_special 
+  </select>
+  <resultMap type="com.cjf.cms.domain.Special" id="specialMap">
+  	<id column="id" property="id" />
+  	
+  	<result column="tittle" property="tittle" />
+  	<result column="aabstract" property="aabstract" />
+  	<collection property="listArticle" column="id" ofType="com.cjf.cms.domain.Article" select="getArticle"></collection>
+  	
+  	
+  </resultMap>
+  <select id="getArticle" parameterType="int" resultType="com.cjf.cms.domain.Article">
+  	SELECT 
+		b.id, b.title
+ 	FROM 
+ 		cms_article as b
+ 	LEFT JOIN cms_special_article as csa ON csa.aid=b.id
+ 	LEFT JOIN cms_special as cs ON cs.id=csa.sid
+ 	LEFT JOIN cms_user as u ON b.user_id=u.id
+    WHERE  cs.id = #{id,jdbcType=INTEGER} limit 5
+  </select>
   
   <sql id="Example_Where_Clause">
     <where>
@@ -120,6 +148,12 @@
       <if test="content != null">
         content,
       </if>
+      <if test="gjz != null">
+        gjz,
+      </if>
+      <if test="content != null">
+        wzlj,
+      </if>
     </trim>
  
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -162,13 +196,19 @@
       <if test="content != null">
         #{content,jdbcType=CLOB},
       </if>
+      <if test="gjz != null">
+        #{gjz,jdbcType=VARCHAR},
+      </if>
+      <if test="wzlj != null">
+        #{wzlj,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <!-- 根据主键查询 -->
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
 	SELECT 
 		b.id, b.title, b.picture, b.summary, b.content, b.channel_id, b.category_id, b.user_id, b.hits, b.hot, b.created, b.updated, 
-		u.id as author_id,
+		b.gjz, b.wzlj, u.id as author_id,
 		u.nickname as author_nickname,
 		ch.id as channel_id,
 		ch.name as channel_name,
@@ -182,10 +222,10 @@
     WHERE  b.id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selects" resultMap="BaseResultMap">
+  <select id="selects" parameterType="article" resultMap="BaseResultMap">
 	SELECT 
 		b.id, b.title, b.picture, b.summary, b.channel_id, b.category_id, b.user_id, b.hits, b.hot,b.status,b.deleted, b.created, b.updated, 
-		u.id as author_id,
+		b.gjz, b.wzlj, u.id as author_id,
 		u.nickname as author_nickname,
 		ch.id as channel_id,
 		ch.name as channel_name,
@@ -214,13 +254,12 @@
     	AND b.deleted = #{article.deleted,jdbcType=BIT}
     </if>
     <if test="article.hot != null">
-    	AND b.hot = #{article.hot,jdbcType=BIT}
+    	AND hot = #{article.hot,jdbcType=BIT}
     </if>
-    
-    <if test="order == null">
+    <!-- <if test="order == null">
 	    ORDER BY created desc
-    </if>
-    <if test="order != null">
+    </if> -->
+   <!--  <if test="order != null">
 	    ORDER BY
     	<foreach collection="order" index="key" item="ent" separator=",">
     		#{key} #{ent ? 'asc' : 'desc'}
@@ -229,13 +268,13 @@
     
     <if test="page != null">
     LIMIT #{page.firstIndex},#{page.pageSize}
-    </if>
+    </if> -->
   </select>
   
   <select id="queryAll" parameterType="article" resultType="article">
 	SELECT 
 		b.id, b.title, b.picture, b.summary, b.channel_id, b.category_id, b.user_id, b.hits, b.hot,b.status,b.deleted, b.created, b.updated, 
-		u.id as author_id,
+		b.gjz, b.wzlj, u.id as author_id,
 		u.nickname as author_nickname,
 		ch.id as channel_id,
 		ch.name as channel_name,
@@ -383,6 +422,12 @@
       <if test="content != null">
        content =  #{content,jdbcType=CLOB},
       </if>
+      <if test="gjz != null">
+       gjz =  #{gjz,jdbcType=VARCHAR},
+      </if>
+      <if test="wzlj != null">
+       wzlj =  #{wzlj,jdbcType=VARCHAR},
+      </if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
@@ -390,4 +435,74 @@
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
    	 	delete from cms_article where id = #{id,jdbcType=INTEGER}
   	</delete>
+  	
+  	<update id="updateUserByKey" parameterType="com.cjf.cms.domain.User">
+  		update cms_user
+  		<set>
+  			<if test="username != null">
+  				username=#{username,jdbcType=VARCHAR},
+  			</if>
+  			<if test="password != null">
+  				password=#{password,jdbcType=VARCHAR},
+  			</if>
+  			<if test="phone != null">
+  				phone=#{phone,jdbcType=VARCHAR},
+  			</if>
+  			<if test="email != null">
+  				email=#{email,jdbcType=VARCHAR},
+  			</if>
+  			<if test="address != null">
+  				address=#{address,jdbcType=VARCHAR},
+  			</if>
+  			<if test="star != null">
+  				star=#{star,jdbcType=VARCHAR},
+  			</if>
+  			<if test="motot != null">
+  				motot=#{motot,jdbcType=VARCHAR},
+  			</if>
+  		</set>
+  		where id = #{id,jdbcType=INTEGER}
+  	</update>
+  	
+  	
+  	<select id="queryAll1" parameterType="article" resultType="article">
+	SELECT 
+		b.id, b.title, b.picture, b.summary, b.channel_id, b.category_id, b.user_id, b.hits, b.hot,b.status,b.deleted, b.created, b.updated, 
+		b.gjz, b.wzlj, u.id as author_id,
+		u.nickname as author_nickname,
+		
+		ch.id as channel_id,
+		ch.name as channel_name,
+		ca.id as category_id,
+		ca.name as category_name
+ 	FROM 
+ 		cms_article as b<!-- 文章表 -->
+ 		LEFT JOIN cms_channel as ch ON b.channel_id=ch.id<!-- 频道表 -->
+ 		LEFT JOIN cms_category as ca ON b.user_id=ca.id<!--分类表  -->
+ 		LEFT JOIN cms_user as u ON b.user_id=u.id <!-- 用户表 -->
+    WHERE 
+    1=1
+    <if test="article.author != null">
+    	AND b.user_id = #{article.author.id,jdbcType=INTEGER}                                                     
+    </if>
+     <if test="article.channel != null and article.channel.id != null">
+    	AND b.channel_id = #{article.channel.id,jdbcType=INTEGER}
+    </if>
+    <if test="article.category != null and article.category.id != null">
+    	AND b.category_id = #{article.category.id,jdbcType=INTEGER}
+    </if>
+    <if test="article.status != null">
+    	AND b.status = #{article.status,jdbcType=INTEGER}
+    </if>
+    <if test="article.deleted != null">
+    	AND b.deleted = #{article.deleted,jdbcType=BIT}
+    </if> 
+    
+    <if test="article.hot != null">
+    	AND b.hot = #{article.hot,jdbcType=BIT}
+    </if>
+    <if test="article.author != null">
+    	AND b.user_id = #{article.user_id,jdbcType=VARCHAR}
+    </if>           
+  </select>
 </mapper>

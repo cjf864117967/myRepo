@@ -47,6 +47,23 @@ public class User implements Serializable {
 	/**更新时间*/
 	private Date updated;
 	
+	/**电话*/
+	private String phone;
+	
+	/**邮箱*/
+	private String email;
+	
+	/**地址*/
+	private String address;
+	
+	/**星座*/
+	private String star;
+	
+	/**座右铭*/
+	private String motot;
+	
+	/**头像*/
+	private String pictures;
 	
 	//------------------------------------------------------------------------
 	
@@ -64,11 +81,22 @@ public class User implements Serializable {
 	}
 
 	
+	
 	//------------------------------------------------------------------------
 
-
+	
 	public Integer getId() {
 		return id;
+	}
+
+	
+
+	public String getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 
 	public void setId(Integer id) {
@@ -138,9 +166,49 @@ public class User implements Serializable {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-
+	
 	
 	//--------------------------------------------------------------------------------
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getStar() {
+		return star;
+	}
+
+	public void setStar(String star) {
+		this.star = star;
+	}
+
+	public String getMotot() {
+		return motot;
+	}
+
+	public void setMotot(String motot) {
+		this.motot = motot;
+	}
 
 	@Override
 	public int hashCode() {
@@ -166,5 +234,18 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password="
+				+ password + ", nickname=" + nickname + ", birthday="
+				+ birthday + ", gender=" + gender + ", locked=" + locked
+				+ ", created=" + created + ", updated=" + updated + ", phone="
+				+ phone + ", email=" + email + ", address=" + address
+				+ ", star=" + star + ", motot=" + motot + ", pictures="
+				+ pictures + "]";
+	}
+
+	
 	
 }

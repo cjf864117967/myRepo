@@ -21,7 +21,8 @@
             http://www.springframework.org/schema/util 
             http://www.springframework.org/schema/util/spring-util.xsd 
             ">
-
+	
+	
 	<!-- 第1步：加载配置文件 -->
 	<context:property-placeholder location="classpath:db.properties"/>
 	
@@ -30,6 +31,8 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:exclude-filter type="regex" expression="com\.cjf\.cms\.web\..*"/>
 	</context:component-scan>
+	
+	 
 	
 	<!-- 第3步：配置数据源，常见的有dbcp、c3p0、阿里数据源、BoneCP -->
 	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource">
@@ -79,4 +82,5 @@
 		<property name="corePoolSize" value="5"/>
 		<property name="maxPoolSize" value="20"/>
 	</bean>
+	
 </beans>

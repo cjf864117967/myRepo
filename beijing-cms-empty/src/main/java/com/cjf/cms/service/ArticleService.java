@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.cjf.cms.core.Page;
 import com.cjf.cms.domain.Article;
+import com.cjf.cms.domain.Special;
 import com.cjf.cms.domain.User;
 
 /**
@@ -40,6 +41,14 @@ public interface ArticleService {
 	public abstract void save(Article article);
 
 	public abstract void deleteByPrimaryKey(Integer id);
+
+	public abstract void updateUserByKey(User user);
+
+	public abstract List<Article> queryAll1(Article article);
+
+	public abstract List<Article> selects(Article article);
+
+	public abstract List<Special> getSpecial();
 	
 
 }

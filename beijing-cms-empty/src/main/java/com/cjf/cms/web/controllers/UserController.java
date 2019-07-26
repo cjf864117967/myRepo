@@ -25,6 +25,7 @@ import com.cjf.cms.domain.Category;
 import com.cjf.cms.domain.Channel;
 import com.cjf.cms.domain.User;
 import com.cjf.cms.service.ArticleService;
+import com.cjf.cms.service.UserService;
 import com.cjf.cms.utils.FileUploadUtil;
 import com.cjf.cms.utils.PageHelpUtil;
 import com.cjf.cms.web.Constant;
@@ -46,13 +47,18 @@ public class UserController {
 	@Autowired
 	ArticleService articleService;
 	
+	@Autowired
+	UserService userService;
 	@RequestMapping({"/", "/index", "/home"})
 	public String home(){
 		return "user-space/home";
 	}
 	
 	@RequestMapping({"/profile"})
-	public String profile(){
+	public String profile(HttpServletRequest request,User user,Model model){
+		User userLogin = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
+		User u = userService.selectById(userLogin.getId());
+		model.addAttribute("user", u);
 		return "user-space/profile";
 	}
 	
@@ -70,7 +76,7 @@ public class UserController {
 		model.addAttribute("blogs", articles);
 		model.addAttribute("pageList", pageList);
 		
-		return "user-space/blog_list";
+		return "user-space/article_list";
 		
 	}
 	@RequestMapping("/blog/edit")
@@ -107,6 +113,66 @@ public class UserController {
 	public String remove(Integer id){
 		articleService.deleteByPrimaryKey(id);
 		return "redirect:/my/blogs";
+		
+	}
+	@RequestMapping("/user/edit")
+	public String edit(User user){
+		articleService.updateUserByKey(user);
+		return "user-space/profile";
+		
+	}
+	
+	@RequestMapping("/hot")
+	public String hot(Article article,Integer id,HttpServletRequest request,Model model){
+		User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
+		article.setAuthor(user);
+		article.setHot(true);
+		List<Article> list = articleService.selects(article);
+		model.addAttribute("blogs", list);
+		return "user-space/article_list";
+		
+	}
+	@RequestMapping("/status")
+	public String status(Article article,Integer id,HttpServletRequest request,Model model){
+		User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
+		article.setAuthor(user);
+		article.setStatus(1);
+		List<Article> list = articleService.selects(article);
+		model.addAttribute("blogs", list);
+		
+		return "user-space/article_list";	
+	}
+	
+	
+	
+	
+	@RequestMapping("/deleted")
+	public String deleted(Article article,Integer id,HttpServletRequest request,Model model){
+		User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
+		article.setAuthor(user);
+		article.setDeleted(true);
+		List<Article> list = articleService.selects(article);
+		model.addAttribute("blogs", list);
+		return "user-space/article_list";
+		
+	}
+	@RequestMapping("/profile/avatar")
+	public String avatar(Model model,HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
+		model.addAttribute("user", user);
+		return "user-space/avatar";
+	}
+	@RequestMapping("/addUserPhoto")
+	public String addUserPhoto(User u,MultipartFile file,HttpServletRequest request){
+		String upload = FileUploadUtil.upload(request, file);
+			if(!upload.equals("")){
+				u.setPictures(upload);
+			}
+		userService.addUserPhoto(u);
+		User user = userService.get(u.getId());
+		request.getSession().setAttribute(Constant.LOGIN_USER, user);
+		System.out.println(u);
+		return "redirect:/my/profile/avatar";
 		
 	}
 }

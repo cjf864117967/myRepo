@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cjf.cms.core.Page;
 import com.cjf.cms.dao.ArticleMapper;
 import com.cjf.cms.domain.Article;
+import com.cjf.cms.domain.Special;
+import com.cjf.cms.domain.User;
 import com.cjf.cms.service.ArticleService;
 
 /**
@@ -80,6 +83,30 @@ public class ArticleServiceImpl implements ArticleService {
 	public void deleteByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
 		articleMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public void updateUserByKey(User user) {
+		// TODO Auto-generated method stub
+		articleMapper.updateUserByKey(user);
+	}
+
+	@Override
+	public List<Article> queryAll1(Article article) {
+		// TODO Auto-generated method stub
+		return articleMapper.queryAll1(article);
+	}
+
+	@Override
+	public List<Article> selects(Article article) {
+		// TODO Auto-generated method stub
+		return articleMapper.selects(article);
+	}
+
+	@Override
+	public List<Special> getSpecial() {
+		// TODO Auto-generated method stub
+		return articleMapper.getSpecial();
 	}
 	
 	
