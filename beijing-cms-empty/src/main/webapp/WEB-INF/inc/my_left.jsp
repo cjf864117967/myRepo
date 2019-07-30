@@ -2,8 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="avatar">
 	
-	<!-- <img alt="" src="/images/default_avatar.png" class="img-thumbnail"> -->
-	<img alt="" src="<%=request.getContextPath()%>${_LOGIN_USER_.pictures}" width="200px" height="150px" class="img-thumbnail">
+	<img alt="" src="/images/default_avatar.png" class="img-thumbnail"> 
 	</div>
 	<br/>
 	<div>

@@ -66,7 +66,7 @@ public class UserController {
 		return "user-space/profile";
 	}
 	
-	@RequestMapping("/blogs")
+	@RequestMapping("/searchblogs")
 	public String blogs(Model model,HttpSession session,@RequestParam(value="page",defaultValue="1")Integer page ){
 		Article article = new Article();
 		User user = (User) session.getAttribute(Constant.LOGIN_USER);
@@ -80,116 +80,7 @@ public class UserController {
 		model.addAttribute("blogs", articles);
 		model.addAttribute("pageList", pageList);
 		
-		return "user-space/article_list";
-		
-	}
-	@RequestMapping("/blog/edit")
-	public String edit(Integer id,Model model){
-		Article article = articleService.selectByPrimaryKey(id);
-		model.addAttribute("blog", article);
-		return "user-space/blog_edit";
-	}
-	@RequestMapping("/blog/save")
-	public String save(Article article,MultipartFile file,HttpServletRequest request,MultipartFile[] photo,String[] desc){
-		List<Pictures> pictures = new ArrayList<Pictures>();
-		for (int i = 0; i < desc.length; i++) {
-			article.setArticleType(1);
-			Pictures picture = new Pictures();
-			String upload = FileUploadUtil.upload(request, photo[i]);
-			picture.setPhoto(upload);
-			picture.setDesc(desc[i]);
-			pictures.add(picture);
-		}
-		
-		String upload2 = FileUploadUtil.upload(request, file);
-		if(!upload2.equals("")){
-			article.setPicture(upload2);
-		}
-		if(article.getId()!=null){
-			//修改文章
-			articleService.updateByKey(article);
-		}else{
-			article.setHits(0);//第一次点击数
-			article.setHot(true);//是否为热门文章
-			article.setStatus(1);//是否通过审核
-			article.setDeleted(false);//是否被删除
-			article.setCreated(new Date());//文章发布时间
-			//发布文章
-			User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
-			article.setAuthor(user);
-			article.setContent(JSONArray.toJSONString(pictures));
-			System.out.println(article);
-			articleService.save(article);
-		}
-		return "redirect:/my/blogs";
-		
-	}
-	@RequestMapping("/blog/remove")
-	public String remove(Integer id){
-		articleService.deleteByPrimaryKey(id);
-		return "redirect:/my/blogs";
-		
-	}
-	@RequestMapping("/user/edit")
-	public String edit(User user,String genderName){
-		Gender gender = Gender.valueOf(genderName);
-		user.setGender(gender);
-		articleService.updateUserByKey(user);
-		return "user-space/profile";
-		
-	}
-	
-	@RequestMapping("/hot")
-	public String hot(Article article,Integer id,HttpServletRequest request,Model model){
-		User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
-		article.setAuthor(user);
-		article.setHot(true);
-		List<Article> list = articleService.selects(article);
-		model.addAttribute("blogs", list);
-		return "user-space/article_list";
-		
-	}
-	@RequestMapping("/status")
-	public String status(Article article,Integer id,HttpServletRequest request,Model model){
-		User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
-		article.setAuthor(user);
-		article.setStatus(1);
-		List<Article> list = articleService.selects(article);
-		model.addAttribute("blogs", list);
-		
-		return "user-space/article_list";	
-	}
-	
-	
-	
-	
-	@RequestMapping("/deleted")
-	public String deleted(Article article,Integer id,HttpServletRequest request,Model model){
-		User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
-		article.setAuthor(user);
-		article.setDeleted(true);
-		List<Article> list = articleService.selects(article);
-		model.addAttribute("blogs", list);
-		return "user-space/article_list";
-		
-	}
-	@RequestMapping("/profile/avatar")
-	public String avatar(Model model,HttpServletRequest request){
-		User user = (User) request.getSession().getAttribute(Constant.LOGIN_USER);
-		model.addAttribute("user", user);
-		return "user-space/avatar";
-	}
-	@RequestMapping("/addUserPhoto")
-	public String addUserPhoto(User u,MultipartFile file,HttpServletRequest request){
-		String upload = FileUploadUtil.upload(request, file);
-			if(!upload.equals("")){
-				u.setPictures(upload);
-			}
-		userService.addUserPhoto(u);
-		User user = userService.get(u.getId());
-		request.getSession().setAttribute(Constant.LOGIN_USER, user);
-		System.out.println(u);
-		return "redirect:/my/profile/avatar";
+		return "user-space/blog_list";
 		
 	}
 }

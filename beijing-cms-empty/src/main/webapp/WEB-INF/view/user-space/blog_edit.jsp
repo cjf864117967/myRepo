@@ -59,10 +59,6 @@
 				    	</p>
 				    	<p>
 				    		<input id="title" name="title" style="" value="${blog.title}" class="form-control" placeholder="博客标题"/>
-				    		<button id="btitle" type="button" class="btn btn-default">B</button>
-				    		<button id="ititle" type="button" class="btn btn-default">I</button>
-				    		<button id="rtitle" type="button" class="btn btn-default">R</button>
-				    		<input type="text" name="style" id="style"  >
 				    		<span class="red"></span>
 				    	</p>
 				    	<p>
@@ -74,7 +70,6 @@
 				    		<span class="red"></span>
 				    	</p>
 				    	<p id="p">
-				    		<input type="button" id="btn" value="添加图片" ><br><br>
 				    		
 				    	</p>
 				    	
@@ -103,50 +98,6 @@
 	<jsp:include page="/WEB-INF/inc/footer.jsp"/>
 	
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-	<script type="text/javascript">
-		$("#btitle").click(function(){
-			var style = $("#title").attr("style")
-			if(style.indexOf("font-weight: bolder;")!=-1){
-				var str = style.replace("font-weight: bolder;","");
-				$("#title").attr("style",str);	
-				$("#style").val($("#title").attr("style"))
-			}else{
-				$("#title").attr("style",style+"font-weight: bolder;");
-				$("#style").val($("#title").attr("style"))
-			}
-		})
-	</script>
-	<script type="text/javascript">
-		$("#ititle").click(function(){
-			var style= $("#title").attr("style")
-			if(style.indexOf("font-style: italic;")!=-1){
-				var str = style.replace("font-style: italic;","")
-				$("#title").attr("style",str)
-				$("#style").attr($("#title").attr("style"))
-			}else{
-				$("#title").attr("style",style+"font-style: italic;")
-				$("#style").val($("#title").attr("style"))
-			}
-		})
-	</script>
-	<script type="text/javascript">
-		$("#rtitle").click(function(){
-			var style = $("#title").attr("style");
-			if(style.indexOf("color: red;")!=-1){
-				var str = style.replace("color: red;","");
-				$("#title").attr("style",str)
-				$("#style").val($("#title").attr("style"))
-			}else{
-				$("#title").attr("style",style+"color: red;");
-				$("#style").val($("#title").attr("style"))
-			}
-		})
-	</script>
-	<script type="text/javascript">
-		$("#btn").click(function(){
-			$("#p").append("<input type='file' name='photo'><br><br><input type='text' name='desc' placeholder='图片描述'><br><br>")
-		})
-	</script>
 	<script type="text/javascript">
 		/* $(document).ready(function(){
 			$("#content").summernote({

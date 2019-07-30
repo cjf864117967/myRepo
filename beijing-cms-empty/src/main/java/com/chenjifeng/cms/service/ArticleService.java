@@ -32,23 +32,10 @@ public interface ArticleService {
 
 	public abstract void increaseHit(Integer id);
 
-	public abstract Article selectByPrimaryKey(Integer id);
 
 	public abstract List<Article> queryAll(Article article);
 
-	public abstract void updateByKey(Article article);
-
-	public abstract void save(Article article);
-
-	public abstract void deleteByPrimaryKey(Integer id);
-
-	public abstract void updateUserByKey(User user);
-
-	public abstract List<Article> queryAll1(Article article);
-
-	public abstract List<Article> selects(Article article);
-
-	public abstract List<Special> getSpecial();
+	
 	
 
 }

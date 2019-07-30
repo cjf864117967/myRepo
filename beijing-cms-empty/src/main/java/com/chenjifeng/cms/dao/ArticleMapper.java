@@ -56,28 +56,7 @@ public interface ArticleMapper {
 	 */
 	public int count(@Param("article") Article article);
 
-
-	public Article selectByPrimaryKey(Integer id);
-
-
 	public List<Article> queryAll(@Param("article")Article article);
 
-
-	public void updateByKey(Article article);
-
-
-	public void deleteByPrimaryKey(Integer id);
-
-
-	public void updateUserByKey(User user);
-
-
-	public List<Article> queryAll1(@Param("article")Article article);
-
-
-	public List<Article> selects(@Param("article")Article article);
-
-
-	public List<Special> getSpecial();
 
 }

@@ -101,8 +101,4 @@
       </if>
     </trim>
   </insert>
-  
-  <update id="addUserPhoto" parameterType="com.chenjifeng.cms.domain.User">
-  	 update cms_user set pictures = #{pictures} where id = #{id};
-  </update>
 </mapper>

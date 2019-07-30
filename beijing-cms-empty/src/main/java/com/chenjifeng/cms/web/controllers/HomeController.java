@@ -164,29 +164,5 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/article")
-	public String article(Integer id,Model model){
-		
-		Article articles = new Article();
-		articles.setDeleted(false);
-		articles.setStatus(1);
-		articles.setHot(true);
-		 	
-		Page lastArticlesPage = new Page(1, 5);
-		lastArticlesPage.setTotalCount(100);//设置了总记录数，可以节省统计查询，提高性能。
-		
-		List<Article> pictureArticles = articleService.gets(articles, lastArticlesPage, null);
-		model.addAttribute("articles", pictureArticles);
-		
-		
-		articleService.increaseHit(id);
-		Article article = articleService.selectByPrimaryKey(id);
-		if(article.getContent()!=null && article.getContent().length()>0){
-			List<Pictures> picture = JSONArray.parseArray(article.getContent(), Pictures.class);
-			model.addAttribute("picture", picture);
-		}
-		model.addAttribute("blog", article);
-		return "blog";
-		
-	}
+	
 }

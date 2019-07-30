@@ -453,80 +453,8 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-   	 	delete from cms_article where id = #{id,jdbcType=INTEGER}
-  	</delete>
-  	
-  	<update id="updateUserByKey" parameterType="com.chenjifeng.cms.domain.User">
-  		update cms_user
-  		<set>
-  			<if test="username != null">
-  				username=#{username,jdbcType=VARCHAR},
-  			</if>
-  			<if test="password != null">
-  				password=#{password,jdbcType=VARCHAR},
-  			</if>
-  			<if test="gender != null">
-  				gender = #{gender.ordinal,jdbcType=INTEGER},
-  			</if>
-  			<if test="phone != null">
-  				phone=#{phone,jdbcType=VARCHAR},
-  			</if>
-  			<if test="email != null">
-  				email=#{email,jdbcType=VARCHAR},
-  			</if>
-  			<if test="address != null">
-  				address=#{address,jdbcType=VARCHAR},
-  			</if>
-  			<if test="star != null">
-  				star=#{star,jdbcType=VARCHAR},
-  			</if>
-  			<if test="motot != null">
-  				motot=#{motot,jdbcType=VARCHAR},
-  			</if>
-  		</set>
-  		where id = #{id,jdbcType=INTEGER}
-  	</update>
+	
   	
   	
-  	<select id="queryAll1" parameterType="article" resultType="article">
-	SELECT 
-		b.id, b.title, b.picture, b.summary, b.channel_id, b.category_id, b.user_id, b.hits, b.hot,b.status,b.deleted, b.created, b.updated, 
-		b.gjz, b.wzlj, b.style, u.id as author_id,
-		u.nickname as author_nickname,
-		
-		ch.id as channel_id,
-		ch.name as channel_name,
-		ca.id as category_id,
-		ca.name as category_name
- 	FROM 
- 		cms_article as b<!-- 文章表 -->
- 		LEFT JOIN cms_channel as ch ON b.channel_id=ch.id<!-- 频道表 -->
- 		LEFT JOIN cms_category as ca ON b.user_id=ca.id<!--分类表  -->
- 		LEFT JOIN cms_user as u ON b.user_id=u.id <!-- 用户表 -->
-    WHERE 
-    1=1
-    <if test="article.author != null">
-    	AND b.user_id = #{article.author.id,jdbcType=INTEGER}                                                     
-    </if>
-     <if test="article.channel != null and article.channel.id != null">
-    	AND b.channel_id = #{article.channel.id,jdbcType=INTEGER}
-    </if>
-    <if test="article.category != null and article.category.id != null">
-    	AND b.category_id = #{article.category.id,jdbcType=INTEGER}
-    </if>
-    <if test="article.status != null">
-    	AND b.status = #{article.status,jdbcType=INTEGER}
-    </if>
-    <if test="article.deleted != null">
-    	AND b.deleted = #{article.deleted,jdbcType=BIT}
-    </if> 
-    
-    <if test="article.hot != null">
-    	AND b.hot = #{article.hot,jdbcType=BIT}
-    </if>
-    <if test="article.author != null">
-    	AND b.user_id = #{article.user_id,jdbcType=VARCHAR}
-    </if>           
-  </select>
+  	
 </mapper>

@@ -54,12 +54,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	
-	@Override
-	public Article selectByPrimaryKey(Integer id) {
-		
-		// TODO Auto-generated method stub
-		return articleMapper.selectByPrimaryKey(id);
-	}
+	
 
 	@Override
 	public List<Article> queryAll(Article article) {
@@ -67,47 +62,7 @@ public class ArticleServiceImpl implements ArticleService {
 		return articleMapper.queryAll(article);
 	}
 
-	@Override
-	public void updateByKey(Article article) {
-		// TODO Auto-generated method stub
-		articleMapper.updateByKey(article);
-	}
-
-	@Override
-	public void save(Article article) {
-		// TODO Auto-generated method stub
-		articleMapper.save(article);
-	}
-
-	@Override
-	public void deleteByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		articleMapper.deleteByPrimaryKey(id);
-	}
-
-	@Override
-	public void updateUserByKey(User user) {
-		// TODO Auto-generated method stub
-		articleMapper.updateUserByKey(user);
-	}
-
-	@Override
-	public List<Article> queryAll1(Article article) {
-		// TODO Auto-generated method stub
-		return articleMapper.queryAll1(article);
-	}
-
-	@Override
-	public List<Article> selects(Article article) {
-		// TODO Auto-generated method stub
-		return articleMapper.selects(article);
-	}
-
-	@Override
-	public List<Special> getSpecial() {
-		// TODO Auto-generated method stub
-		return articleMapper.getSpecial();
-	}
+	
 	
 	
 }
