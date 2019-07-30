@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@page import="com.cjf.cms.core.Page" %>
+<%@page import="com.chenjifeng.cms.core.Page" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>

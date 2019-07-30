@@ -103,7 +103,7 @@
 						    </a>
 						  </div>
 						  <div class="media-body">
-						    <h3 class="media-heading article_title"><a href="/article?id=${article.id}">${article.title }</a></h3>
+						    <h3 class="media-heading article_title"  ><a href="/article?id=${article.id}"><span style="${article.style}">${article.title }</span></a></h3>
 						    <p>${article.summary}</p>
 						    <p class="blog_item_footer">
 						    	<span class="glyphicon glyphicon-user" title="作者"></span>作者：${article.author.nickname}&nbsp;&nbsp; &nbsp;
@@ -115,7 +115,7 @@
 					</c:when>
 					<c:otherwise>
 						  <div>
-						    <h3><a class="article_title" href="/blog/${article.id}">${article.title }</a></h3>
+						    <h3 style="${article.style}" ><a class="article_title" href="/blog/${article.id}"></a><span style="${article.style}">${article.title }</span></h3>
 						    <p>${article.summary}</p>
 						    <p class="blog_item_footer">
 						    	<span class="glyphicon glyphicon-user" title="作者"></span>作者：${article.author.nickname}&nbsp;&nbsp;&nbsp;
@@ -135,12 +135,12 @@
 					<div class="card-body">
 						<ol>
 							<c:forEach items="${lastArticles}" var="article">
-							<li class="text-truncate"><a href="/article/${article.id}">${article.title}</a></li>
+							<li style="${article.style}" class="text-truncate"><a href="/article/${article.id}"><span style="${article.style}">${article.title}</span></a></li>
 							</c:forEach>
 						</ol>
 					</div>
 				</div>
-				<div>
+				<%-- <div>
 					<h3>专题</h3>
 					<table class="table table-hover">
 						<c:forEach items="${special }" var="b">
@@ -154,6 +154,18 @@
 						</c:forEach>
 					</table>
 					
+				</div> --%>
+				<div class="card">
+					<div class="card-header">最新图片文章</div>
+					<div class="card-body">
+						<ol>
+							<c:forEach items="${picture}" var="b">
+							<li class="text-truncate"><a href="/article?id=${b.id}"><span style="${b  .style}">${b.title}</span></a>
+								<img alt="" src="<%=request.getContextPath() %>${b.picture }" width="100px" height="100px" class="img-thumbnail">
+							</li>
+							</c:forEach>
+						</ol>
+					</div>
 				</div>
 			</div> 
 			

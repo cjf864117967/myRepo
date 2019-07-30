@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -60,6 +61,12 @@
 				  <div class="form-group">
 				    <div class="col-sm-10">
 				      <input type="text" class="form-control" name="password" value="${user.password }"  placeholder="密码">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-10">
+				      <input type="radio"  name="genderName" <c:if test="${user.gender.ordinal() == 1 }" >checked="checked"</c:if>  value="MALE"  placeholder="男">男
+				      <input type="radio"  name="genderName" <c:if test="${user.gender.ordinal() == 0 }" >checked="checked"</c:if>  value="FAMALE" placeholder="女">女
 				    </div>
 				  </div>
 				  <div class="form-group">
